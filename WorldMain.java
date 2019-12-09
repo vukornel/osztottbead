@@ -10,9 +10,9 @@ public class WorldMain {
 	static int personNumber = 0;
 
 	public static void main( String[] args) throws Exception {
-		try(Scanner scIn = new Scanner(System.in);
-			ServerSocket ss = new ServerSocket(4321);
-			//Socket s = ss.accept();
+		try(ServerSocket ss = new ServerSocket(4321);
+			Socket s = ss.accept();
+			Scanner scIn = new Scanner(s.getInputStream());
 		){
 			if (args.length > 0){
 				randomStart(args[0]);
@@ -39,6 +39,7 @@ public class WorldMain {
 							break;
 						}
 						case "person": {
+							//megnezni hogy vane arg1
 							createPerson(lineTomb[1]);
 							break;
 						}
@@ -87,7 +88,7 @@ public class WorldMain {
 
 	public static void createCity( String nev) {
 		if (cityNumber < 12) {
-			Scanner scIn = new Scanner(System.in);
+			
 			int cityport;
 
 			do {
@@ -101,20 +102,23 @@ public class WorldMain {
 			final int fport = cityport;
 
 			new Thread(() -> {
-				try (Socket s = new Socket("localhost", fport);
-					Scanner sc = new Scanner(s.getInputStream());
-					PrintWriter pw = new PrintWriter(s.getOutputStream());
+				try (ServerSocket ss = new ServerSocket(fport);
+					//Socket s = ss.accept();
+					//PrintWriter pw = new PrintWriter(s.getOutputStream());
+					Scanner scIn = new Scanner(System.in); // nem inputstream egyenlőre
 					){
-						City city = new City(nev, fport);while(true){
-						while (scIn.hasNextLine()) {
-							city.Action(scIn.nextLine());
+						City city = new City(nev, fport);
+						System.out.println(nev + " created at " + fport);
+						while(true){
+							while (scIn.hasNextLine()) {
+								city.Action(scIn.nextLine());
+							}
 						}
-					}
 				} catch ( Exception e) {
 					e.printStackTrace();
 				}
+				System.out.println(nev + " stopped at " + fport);
 			}).start();
-			scIn.close();
 		} else {
 			System.out.println("failed");
 		}
@@ -136,7 +140,7 @@ public class WorldMain {
 			int personport;
 
 			do {
-				 Random r = new Random();
+				Random r = new Random();
 				personport = r.nextInt((37000 - 36000) + 1) + 37000;
 			} while (foglalt(personport));
 
@@ -151,10 +155,12 @@ public class WorldMain {
 					PrintWriter pw = new PrintWriter(s.getOutputStream());
 					){
 					Person person = new Person(nev, fport);
+					System.out.println(nev + " create at " + fport);
 					while(true){
 						while (scIn.hasNextLine()) {
 							person.Action(scIn.nextLine());
 						}
+						//automatikus müködés?
 					}
 				} catch ( Exception e) {
 					e.printStackTrace();
