@@ -1,11 +1,13 @@
-import java.util.*;
-import java.io.*;
-import java.net.*;
-
 public class Person{
-    public Person(){
-        while(true){
-            
-        }
+    private String nev;
+    private int port;
+    
+    public Person(String _nev, int _port) {
+        nev = _nev;
+        port = _port;
+    }
+
+    public void Action(String _action){
+
     }
 }

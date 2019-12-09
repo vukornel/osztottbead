@@ -1,21 +1,26 @@
-import java.util.*;
 import java.io.*;
-import java.net.*;
 
-public class City{
-    public City(){
-        String varosNev = "";
-        int port = 0;
+public class City {
+    private String varosNev;
+    private int port;
 
-        File file = new File("city-"+varosNev + "-" + port +".txt");
-
-
-        
-        
-        //filebairas
-        FileWriter writer = new FileWriter(file);
-        writer.write("Test data");
-        writer.close();
+    public City(String _nev, int _port) {
+        varosNev = _nev;
+        port = _port;
     }
 
+    public void Action(String _action){
+
+    }
+
+    public void fajlba(String input){
+        File file = new File("city-" + varosNev + "-" + port + ".txt");
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(input);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
