@@ -4,14 +4,14 @@ Valósítsd meg az alábbi játékot, amelyben világutazókat ábrázolunk.
 <h1>WorldMain</h1>
 A játék fő osztálya a WorldMain, ez induláskor elindít egy szervert a 4321 porton. A szerver egyszerre több klienst is ki tud szolgálni. A szerverrel szövegesen lehet kommunikálni, és a következő utasításokat lehet kiadni egy-egy sorban:
 
-~~- city <név>: a megadott nevű város létrejön, mint célpont
+- city <név>: a megadott nevű város létrejön, mint célpont
 a rendszer a 35000..35010 intervallumból véletlenszerűen választ számára egy portot
 ha a port már foglalt, újra próbálkozik
 a szerver válasza egy sor, a port értéke
 ha minden port foglalt az intervallumból, akkor a válasz sor tartalma failed, és nem jön létre a város
 a várost kiszolgáló portot külön szál kezeli, ez rögtön el is indul, működését lásd lent
 - cityinfo <név>: a szerver elküldi a megadott nevű város portját (vagy a none üzenetet, ha nincsen ilyen város)
-~~- citylist: a szerver elküldi egy-egy sorban a létező városok nevét, majd egy üres sort~~
+- citylist: a szerver elküldi egy-egy sorban a létező városok nevét, majd egy üres sort
 - person <név>: létrejön egy új utazó a megadott névvel
 ha a rendszerben még nincsen város, a szerver visszaküldi a failed üzenetet, és nem jön létre az utazó
 a rendszer kiválasztja a 36000..37000 intervallumból a legkisebb, még nem foglalt portot neki
@@ -33,15 +33,15 @@ a városok leállítása előtt lekéri az info adatokat a városról, és kiír
 először a Best city to take a selfie üzenet után sorolja fel őket a városban készült szelfik darabszáma szerinti csökkenő sorrendben (egyenlőség esetén ábécésorrendben), a darabszámokat is kiírva
 másodszor a Best city to spend money in üzenet után sorolja fel őket, ekkor az összköltés szerinti sorrendben
 amikor az exit működés megkezdődött, a city és person üzenetekre failed választ küld a szerver
-~~Automatizált működés
+Automatizált működés
 Ha a WorldMain osztály kap egy parancssori paramétert is, akkor a fenti szerver elindítása mellett a következő tevékenységet is végzi.
 
-~~Készít 3..5 várost (a neveiket véletlenszerűen választja a cities.txt fájlból).
-Készít 4..8 utazót.~~
+Készít 3..5 várost (a neveiket véletlenszerűen választja a cities.txt fájlból).
+Készít 4..8 utazót.
 A paraméterben (ami egy szám) megadott másodperc múlva elküldi az exit üzenetet a szervernek. Ennek hatására a programnak rövid időn belül ki kell lépnie.
 
 <h1>City</h1>
-~~A városok létrehoznak egy city-<városnév>-<port>.txt naplófájlt, pl. city-Budapest-35008.txt.
+A városok létrehoznak egy city-<városnév>-<port>.txt naplófájlt, pl. city-Budapest-35008.txt.
 A városok szekvenciálisan fogadják a kliensek kapcsolódását a portjukon, és a következő utasításokat lehet kiadni a számukra egy-egy sorban:
   
 - arrive <név>: a naplóba bekerül az <idő>: <név> arrived bejegyzés
