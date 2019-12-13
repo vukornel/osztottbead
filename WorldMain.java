@@ -26,44 +26,48 @@ public class WorldMain {
 				while (scIn.hasNextLine()) {
 					line = scIn.nextLine();
 					lineTomb = line.split(" ");
+					System.out.println("scline: " + line);
 
 					switch (lineTomb[0]) {
-					case "city": {
-						if (lineTomb.length < 2)
-							createCity("");
-						else
-							createCity(lineTomb[1]);
-						break;
-					}
-					case "cityinfo": {
-						cityInfo(lineTomb[1]);
-						break;
-					}
-					case "citylist": {
-						cityList();
-						break;
-					}
-					case "person": {
-						if (lineTomb.length < 2)
-							createPerson("");
-						else
-							createPerson(lineTomb[1]);
-						break;
-					}
-					case "do": {
-						sendDo(lineTomb[1], lineTomb[2]);
-						break;
-					}
-					case "finished": {
-						finished(lineTomb[1]);
-						break;
-					}
-					case "exit": {
-						sendExit();
-						scIn.close();
-						// kilepes
-						break;
-					}
+						case "city": {
+							if (lineTomb.length < 2)
+								createCity("");
+							else
+								createCity(lineTomb[1]);
+							break;
+						}
+						case "cityinfo": {
+							cityInfo(lineTomb[1]);
+							break;
+						}
+						case "citylist": {
+							cityList();
+							break;
+						}
+						case "person": {
+							if (lineTomb.length < 2)
+								createPerson("");
+							else
+								createPerson(lineTomb[1]);
+							break;
+						}
+						case "do": {
+							sendDo(lineTomb[1], lineTomb[2]);
+							break;
+						}
+						case "finished": {
+							finished(lineTomb[1]);
+							break;
+						}
+						case "exit": {
+							sendExit();
+							scIn.close();
+							// kilepes
+							break;
+						}
+						default:{
+							System.out.println(lineTomb[0]);
+						}
 					}
 				}
 			}
@@ -319,17 +323,20 @@ public class WorldMain {
 	}
 
 	public static void sendExit() throws IOException {
+		SortedMap<Integer, String> spentAm = new TreeMap<Integer, String>();
+		SortedMap<Integer, String> selfieAm = new TreeMap<Integer, String>();
+
 		for ( Integer port : foglaltPortok) {
 			try (Socket s = new Socket("localhost", port);
-				Scanner sc = new Scanner(s.getInputStream());
 				PrintWriter pw = new PrintWriter(s.getOutputStream());
 			){
 				if(port < 35011){ // city
+					pw.println("info");
+					pw.flush();
 					pw.println("exit");
 					pw.flush();
 				}
 				else{ // person
-					pw.println("info");
 					pw.println("exit");
 					pw.flush();
 				}

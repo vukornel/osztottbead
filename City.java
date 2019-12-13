@@ -42,6 +42,7 @@ public class City {
                 final PrintWriter out = new PrintWriter(server.getOutputStream());
                 out.println(spentMoney);
                 out.println(selfieNum);
+                out.flush();
                 break;
             case "exit":
                 break;
