@@ -343,7 +343,7 @@ public class WorldMain {
 			}
 		}
 
-		//System.exit(0);
+		System.exit(0);
 	}
 }
 
