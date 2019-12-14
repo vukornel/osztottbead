@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 public class Person {
     private String nev;
-    private int port;
+    //private int port;
     private int cityPort;
 
     public Person(String _nev, int _port, int _cityPort) throws IOException {
         nev = _nev;
-        port = _port;
+        //port = _port;
         cityPort = _cityPort;
         try (Socket s = new Socket("localhost", _cityPort);
         Scanner sc = new Scanner(s.getInputStream());

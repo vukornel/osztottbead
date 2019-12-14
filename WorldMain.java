@@ -61,7 +61,6 @@ public class WorldMain {
 						}
 						case "exit": {
 							sendExit();
-							scIn.close();
 							// kilepes
 							break;
 						}
@@ -244,7 +243,6 @@ public class WorldMain {
 					Person person = new Person(vNev, fport, randomValue); // cityport kell
 					System.out.println(vNev + " " + (fport - 36000) + " (city: " + randomValue + ")");
 
-					// automatikus müködés? random szám és váltakozva?
 					Runnable helloRunnable = new Runnable() {
 						public void run() {
 							try {
@@ -345,7 +343,7 @@ public class WorldMain {
 			}
 		}
 
-		System.exit(0);
+		//System.exit(0);
 	}
 }
 

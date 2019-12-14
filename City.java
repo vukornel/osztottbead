@@ -40,6 +40,7 @@ public class City {
                 break;
             case "info":
                 final PrintWriter out = new PrintWriter(server.getOutputStream());
+                System.out.println(spentMoney + " spent " + selfieNum + " db selfie");
                 out.println(spentMoney);
                 out.println(selfieNum);
                 out.flush();
